@@ -10,7 +10,12 @@ This web app is a simple app that retrieves a random recipe. It's currently conf
 ## How to run your own instance
 1. Sign up for a Twitter Developer account and generate your own set of API Keys/Access Tokens.
 2. Sign up for Spoonacular as well, generate an API Key there as well.
-3. Clone the repository and create a file named `auth.env`
+3. Clone the repository and create a file named `auth.env`. You can do this by using the following commands
+```
+git clone https://github.com/NJIT-CS490/RecipeFetcher
+cd RecipeFetcher
+touch auth.env
+```
 4. Copy the following template to the `auth.env` file, fill in the API Keys and Access Tokens that you generated. (Replace the TODO's)
 ```
 export TWITTER_CONSUMER_KEY=TODO
@@ -20,7 +25,8 @@ export TWITTER_ACCESS_TOKEN_SECRET=TODO
 export SPOONACULAR_KEY=TODO
 ```
 5. Type in the command `source auth.env` to load in the environment variables that you just created.
-6. Run the app by using the command `python main.py`
+6. Install the required python libraries, Flask and Tweepy. This can be done by running `pip install flask && pip install tweepy`
+7. Run the app by using the command `python main.py`
 
 ## Issues
 ### CSS Styling
