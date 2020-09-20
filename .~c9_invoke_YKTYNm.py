@@ -18,27 +18,22 @@ twitter_api = tweepy.API(auth, wait_on_rate_limit=True)
 recipeNames = set(open('dishes.txt').read().split())
 
 app = flask.Flask(__name__)
-
 @app.route('/')
 def index():
     currDish = random.choice(tuple(recipeNames))
-    urlStr = "https://api.spoonacular.com/recipes/complexSearch?query="+currDish+"&apiKey="+spoonacular_key
-    content = requests.get(urlStr)
-    print(content.text)
-    
+    content = requests.get(
+            "https://api.spoonacular.com/recipes/query=" +
+            currDish+
+            "&apiKey=" + spoonacular_key)
+    pri
     tweets = tweepy.Cursor(twitter_api.search,
                        q=currDish,
-                       tweet_mode='extended',
                        lang="en").items(5)
-    
-    currTweet = random.choice(list(tweets))
+                       
     return flask.render_template(
         "index.html",
         currentDish = currDish,
-        relevantTweet = currTweet.full_text,
-        tweetDate = str(currTweet.created_at),
-        tweetAuthor = str(currTweet.author.name),
-        tweetUrl = str(currTweet.id)
+        relevantTweet = random.choice(list(tweets)).text
     )
 
 app.run(
