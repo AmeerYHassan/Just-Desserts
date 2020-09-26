@@ -57,6 +57,8 @@ def index():
         recipeURL = infoContent['sourceUrl'],
         recipeImage = infoContent['image'],
         recipeServings = infoContent['servings'],
+        prepTime = infoContent['readyInMinutes'],
+        recipeSummary = infoContent['summary'],
         recipeIngredients = parsedIngredients,
         ingredientsLen = len(parsedIngredients)
     )
