@@ -22,7 +22,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 twitter_api = tweepy.API(auth, wait_on_rate_limit=True)
 
-recipeNames = set(open('dishes.txt').read().split())
+recipeNames = set(open('dishes.txt').read().split("\n"))
 
 app = flask.Flask(__name__)
 
