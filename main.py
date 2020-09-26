@@ -22,8 +22,15 @@ app = flask.Flask(__name__)
 @app.route('/')
 def index():
     currDish = random.choice(tuple(recipeNames))
-    # urlStr = "https://api.spoonacular.com/recipes/complexSearch?query="+currDish+"&apiKey="+spoonacular_key
-    # content = requests.get(urlStr)
+    urlStr = "https://api.spoonacular.com/recipes/complexSearch?query="+currDish+"&apiKey="+spoonacular_key
+    content = requests.get(urlStr)
+    content_json = content.json()
+    random_recipe = random.choice(tuple(content_json['results']))['id']
+    
+    infoUrl = "https://api.spoonacular.com/recipes/"+str(random_recipe)+"/information?apiKey="+spoonacular_key
+    print(infoUrl)
+    infoContent = requests.get(infoUrl).json()
+    print(infoContent)
 
     tweets = tweepy.Cursor(twitter_api.search,
                        q=currDish,
