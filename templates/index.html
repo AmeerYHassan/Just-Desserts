@@ -10,6 +10,11 @@
         <hr>
         <a href={{recipeURL}}><h2>{{recipeTitle}}</h2></a>
         <img class="center" src={{recipeImage}} alt={{recipeTitle}}>
+        <ul>
+            {%for i in range(0, ingredientsLen)%}
+                <li>{{recipeIngredients[i]}}</li>
+            {%endfor%}
+        </ul>
         <div>
             <i class="fab fa-twitter"></i>
             <h3>{{tweetAuthor}}</h3>

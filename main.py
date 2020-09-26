@@ -5,6 +5,13 @@ import flask
 import random
 import requests
 
+def getIngredientList (extendedIngredients):
+    ingredientList = []
+    for ingredient in extendedIngredients:
+        ingredientList.append(ingredient['originalString'])
+
+    return ingredientList
+
 consumer_key = os.environ.get("TWITTER_CONSUMER_KEY")
 consumer_secret = os.environ.get("TWITTER_CONSUMER_SECRET")
 access_token = os.environ.get("TWITTER_ACCESS_TOKEN")
@@ -30,7 +37,9 @@ def index():
     infoUrl = "https://api.spoonacular.com/recipes/"+str(random_recipe)+"/information?apiKey="+spoonacular_key
     print(infoUrl)
     infoContent = requests.get(infoUrl).json()
-
+    ingredients = infoContent['extendedIngredients']
+    parsedIngredients = getIngredientList(ingredients)
+    
     tweets = tweepy.Cursor(twitter_api.search,
                        q=currDish,
                        tweet_mode='extended',
@@ -48,7 +57,8 @@ def index():
         recipeURL = infoContent['sourceUrl'],
         recipeImage = infoContent['image'],
         recipeServings = infoContent['servings'],
-        recipePrepTime = infoContent['']
+        recipeIngredients = parsedIngredients,
+        ingredientsLen = len(parsedIngredients)
     )
 
 app.run(
