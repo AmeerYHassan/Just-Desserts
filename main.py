@@ -46,7 +46,9 @@ def index():
         tweetUrl = str(currTweet.id),
         recipeTitle = infoContent['title'],
         recipeURL = infoContent['sourceUrl'],
-        recipeImage = infoContent['image']
+        recipeImage = infoContent['image'],
+        recipeServings = infoContent['servings'],
+        recipePrepTime = infoContent['']
     )
 
 app.run(
