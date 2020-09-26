@@ -30,7 +30,6 @@ def index():
     infoUrl = "https://api.spoonacular.com/recipes/"+str(random_recipe)+"/information?apiKey="+spoonacular_key
     print(infoUrl)
     infoContent = requests.get(infoUrl).json()
-    print(infoContent)
 
     tweets = tweepy.Cursor(twitter_api.search,
                        q=currDish,
@@ -44,7 +43,10 @@ def index():
         relevantTweet = currTweet.full_text,
         tweetDate = str(currTweet.created_at),
         tweetAuthor = str(currTweet.author.name),
-        tweetUrl = str(currTweet.id)
+        tweetUrl = str(currTweet.id),
+        recipeTitle = infoContent['title'],
+        recipeURL = infoContent['sourceUrl'],
+        recipeImage = infoContent['image']
     )
 
 app.run(
