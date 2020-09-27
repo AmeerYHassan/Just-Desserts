@@ -41,11 +41,12 @@ def index():
     parsedIngredients = getIngredientList(ingredients)
     
     tweets = tweepy.Cursor(twitter_api.search,
-                       q=currDish,
+                       q=f"{currDish} -filter:retweets",
                        tweet_mode='extended',
                        lang="en").items(5)
     
     currTweet = random.choice(list(tweets))
+
     return flask.render_template(
         "index.html",
         currentDish = currDish,

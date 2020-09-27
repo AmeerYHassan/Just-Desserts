@@ -7,16 +7,34 @@
     </head>
     <body>
         <h1>Just Desserts</h1>
-        <hr>
-        <a href={{recipeURL}}><h2>{{recipeTitle}}</h2></a>
-        <img class="center" src={{recipeImage}} alt={{recipeTitle}}>
-        <h4>Ready in {{prepTime}} minutes!</h4>
-        <ul>
-            {%for i in range(0, ingredientsLen)%}
-                <li>{{recipeIngredients[i]}}</li>
-            {%endfor%}
-        </ul>
-        <div>
+        <hr id="mainLine">
+        <div class="prep">
+            <a href={{recipeURL}}><h2>{{recipeTitle}}</h2></a>
+            <p><strong>Ready in {{prepTime}} minutes!</strong></p>
+            <p><strong>Makes about {{recipeServings}} servings!</strong></p>
+        </div>
+        
+        <div class="container-1">
+            <div class="box-1">
+                <h3>Ingredients</h3>
+                <hr>
+                <ul>
+                {%for i in range(0, ingredientsLen)%}
+                    <li>{{recipeIngredients[i]}}</li>
+                {%endfor%}
+                </ul>
+            </div>
+            <div class="box-2">
+                <img src={{recipeImage}} alt="{{recipeTitle}}">
+            </div>
+            <div class="box-3">
+                <h3>Summary</h3>
+                <hr>
+                {{recipeSummary|safe}}
+            </div>
+        </div>
+        
+        <div class="twitter">
             <i class="fab fa-twitter"></i>
             <h3>{{tweetAuthor}}</h3>
             <h3>{{tweetDate}}</h3>
